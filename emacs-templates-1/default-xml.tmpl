@@ -1,0 +1,110 @@
+;;
+;;  File:	default-xml.tmpl
+;;  Project:	EmacsTemplates 
+;;  Desc:
+;;
+;;	Emacs Lisp source
+;;  
+;;  Notes:
+;;    
+;;  Author(s):   Paul Houghton <<paul.houghton@wcom.com>>
+;;  Created:     02/13/2002 05:49
+;;  
+;;  Revision History: (See end of file for Revision Log)
+;;  
+;;	$Author$
+;;	$Date$
+;;	$Name$
+;;	$Revision$
+;;	$State$
+;;
+;;  $Id$
+;;
+
+
+;;
+;; Available Template Variables:
+;;
+;;  file-name
+;;  file-base-name
+;;  file-ext
+;;  email
+;;  timestamp
+;;
+;; Available Template Functions
+;;
+;;  (template-ver-string  tag)
+;;	where tag can be one of:
+;;	    'project | 'author | 'date | 'version | 'state | 'id | 'log
+;;
+;;  (template-get-project-name)
+;;
+;;  (template-insert-fragment tmpl-file)
+;;	Return a string containing the processed contents of
+;;	a template file. See Makefile.tmpl for a usage example.
+;;	
+
+(or template-doc-desc
+    (setq template-doc-desc ""))
+
+(insert
+"<?xml version=\"1.0\" encoding=\"US-ASCII\"?>
+<!DOCTYPE prjdoc
+	PUBLIC \"-//DocTools//DTD General Project Doc//EN\"
+	       \"dtd/DocTools/prjdoc.dtd\" [
+
+ <!ENTITY TOP.DIR \".\">
+ <!ENTITY % projectEntity
+	PUBLIC \"-//Project//ENTITY Project Variables//EN\"
+	       \"../dtd/project.ent\">
+ %projectEntity;
+]>
+
+<prjdoc>
+  <dochead>
+    <title></title>
+    <subtitle></subtitle>
+    <docdesc></docdesc>
+    <keywords>
+    </keywords>
+    <authorgrp>
+      <author fullname=\"" (user-full-name) "\"
+	      email=\" " email " \"/>
+    </authorgrp>
+    <projectname>
+      &PRJ.NAME;
+    </projectname>
+    <docversion
+        created=\"" timestamp "\"
+        verprj=\"" (template-ver-string 'project) "\"
+        veritem=\"" (template-ver-string 'item) "\"
+	verlastmodby=\"" (template-ver-string 'author) "\"
+        verlastmod=\"" (template-ver-string 'date) "\"
+        verversion=\"" (template-ver-string 'version) "\"
+	verstatus=\"" (template-ver-string 'state) "\"
+        verversionid=\"" (template-ver-string 'id) "\"/>
+    <contact>&PRJ.XML.CONTACT;</contact>
+  </dochead>
+
+  <body>
+  </body>
+</prjdoc>
+
+<!-- Revision Log:
+
+  " (template-ver-string 'log) "
+
+-->
+
+<!-- Xemacs Local Variables -->
+
+<!-- Local Variables: -->
+<!-- mode:xml -->
+<!-- End: -->
+
+")
+
+;;; Local Variables:
+;;; mode:Emacs-Lisp
+;;; end:
+

@@ -1,0 +1,57 @@
+;;
+;;  File:	default-dtd.tmpl
+;;  Project:	XEmacsTemplates 
+;;  Desc:
+;;
+;;	Emacs Lisp source
+;;  
+;;  Notes:
+;;    
+;;  Author(s):   Paul Houghton <<paul.houghton@wcom.com>>
+;;  Created:     05/24/2002 09:07
+;;  
+;;  Revision History: (See end of file for Revision Log)
+;;  
+;;	$Author$
+;;	$Date$
+;;	$Name$
+;;	$Revision$
+;;	$State$
+;;
+;;  $Id$
+;;
+
+
+;;
+;; Available Template Variables:
+;;
+;;  file-name
+;;  file-base-name
+;;  file-ext
+;;  email
+;;  timestamp
+;;
+;; Available Template Functions
+;;
+;;  (template-ver-string  tag)
+;;	where tag can be one of:
+;;	    'project | 'author | 'date | 'version | 'state | 'id | 'log
+;;
+;;  (template-get-project-name)
+;;
+;;  (template-insert-fragment tmpl-file)
+;;	Return a string containing the processed contents of
+;;	a template file. See Makefile.tmpl for a usage example.
+;;	
+
+(or template-doc-desc
+    (setq template-doc-desc ""))
+
+(insert
+ (template-insert-fragment "default-dtd-block.tmpl")
+)
+
+;;; Local Variables:
+;;; mode:Emacs-Lisp
+;;; end:
+
