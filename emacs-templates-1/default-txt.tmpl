@@ -1,0 +1,54 @@
+;;
+;;  File:	default-txt.tmpl
+;;  Project:	EmacsTemplates 
+;;  Desc:
+;;
+;;	template file
+;;  
+;;  Notes:
+;;    
+;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
+;;  Created:     08/18/2001 05:35
+;;  
+;;  Revision History: (See end of file for Revision Log)
+;;  
+;;	$Author$
+;;	$Date$
+;;	$Revision$
+;;	$State$
+;;
+;;  $Id$
+;;
+
+(insert 
+"#
+# File:		" file-name "
+# Project:	" (template-get-project-name)
+		  " "
+		  (template-ver-string 'project) "
+# Desc:
+#
+#   " (or template-doc-desc "") "
+# 
+# Notes:
+#
+# Author(s):   " (user-full-name) " " email "
+# Created:     " timestamp "
+#
+# Revision History: (See end of file for Revision Log)
+#
+#	" (template-ver-string 'author) "
+#	" (template-ver-string 'date) "
+#	" (template-ver-string 'version) "
+#	" (template-ver-string 'state) "
+#
+# " (template-ver-string 'id) "
+#
+
+")
+
+
+
+;;; Local Variables:
+;;; mode:Emacs-Lisp
+;;; end:

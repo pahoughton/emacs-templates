@@ -1,0 +1,58 @@
+;;
+;;  File:	default-c-block.tmpl
+;;  Project:	EmacsTemplates 
+;;  Desc:
+;;
+;;	Template for files that use 'c' style block comments.
+;;  
+;;  Notes:
+;;    
+;;  Author(s):   Paul Houghton <paul.houghton@wcom.com>
+;;  Created:     08/18/2001 08:56
+;;  
+;;  Revision History: (See end of file for Revision Log)
+;;  
+;;	$Author$
+;;	$Date$
+;;	$Revision$
+;;	$State$
+;;
+;;  $Id$
+;;
+
+
+(or tempalte-doc-desc
+    (setq template-doc-desc ""))
+
+(insert
+"/**
+  File:		" file-name "
+  Project:	" (template-get-project-name)
+		  " "
+		  (template-ver-string 'project) "
+  Desc:
+
+    " tempalte-doc-desc "
+  
+  Notes:
+    
+  Author(s):   " (user-full-name) " " email "
+  Created:     " (timestamp) "
+  
+  Revision History: (See ChangeLog for details)
+  
+    " (template-ver-string 'author) "
+    " (template-ver-string 'date) "
+    " (template-ver-string 'version) "
+    " (template-ver-string 'state) "
+
+  " (template-ver-string 'id) "
+
+**/
+
+
+")
+
+;;; Local Variables:
+;;; mode:Emacs-lisp
+;;; End:

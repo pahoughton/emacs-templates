@@ -1,0 +1,66 @@
+;;
+;;  File:	default-pl.tmpl
+;;  Project:	EmacsTemplates 
+;;  Desc:
+;;
+;;	Emacs Lisp source
+;;  
+;;  Notes:
+;;    
+;;  Author(s):   Paul Houghton <<pahoughton@users.sourceforge.net>>
+;;  Created:     08/18/2001 11:10
+;;  
+;;  Revision History: (See end of file for Revision Log)
+;;  
+;;	$Author$
+;;	$Date$
+;;	$Revision$
+;;	$State$
+;;
+;;  $Id$
+;;
+
+
+;;
+;; Available Template Variables:
+;;
+;;  file-name
+;;  file-base-name
+;;  file-ext
+;;  email
+;;  timestamp
+;;
+;; Available Template Functions
+;;
+;;  (template-ver-string  tag)
+;;	where tag can be one of:
+;;	    'project | 'author | 'date | 'version | 'state | 'id | 'log
+;;
+;;  (template-get-project-name)
+;;
+;;  (template-insert-fragment tmpl-file)
+;;	Return a string containing the processed contents of
+;;	a template file. See Makefile.tmpl for a usage example.
+;;	
+
+(or tempalte-doc-desc
+    (setq template-doc-desc ""))
+
+(insert
+(template-insert-fragment "default-txt.tmpl")
+"
+
+eval 'exec perl -W $0 ${1+\"$@\"}'
+    if 0 ;
+use strict;
+use warnings;
+
+package " file-base-name ";
+
+"
+)
+
+
+;;; Local Variables:
+;;; mode:Emacs-Lisp
+;;; end:

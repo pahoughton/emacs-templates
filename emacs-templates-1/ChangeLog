@@ -1,0 +1,30 @@
+2001-08-18  Paul Houghton  <pahoughton@users.sourceforge.net>
+
+	* default-el.tmpl:created
+
+	* default-c-block.tmpl: created
+
+	* Makefile.tmpl: created
+
+	* default-tmpl.tmpl: created
+
+	* default-php.tmpl: created
+
+	* default-pl.tmpl: created
+
+	* template-insert.el: added template-doc-desc var so one template
+	can over ride its values when useing another template.
+	(template-insert-file): fixed email variable - user-mail-address
+	had a leading space that needed to bestripted.
+
+2001-08-18  Paul Houghton  <pahoughton@users.sourceforge.net>
+
+	* template-insert.el: First working version.
+
+	* default-txt.tmpl: created
+
+2001-08-17  Paul Houghton  <pahoughton@users.sourceforge.net>
+
+	* template-insert.el: created
+	
+
