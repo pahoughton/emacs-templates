@@ -1,3 +1,9 @@
+2003-04-22  Paul Houghton 719-527-7834  <paul.houghton@wcom.com>
+
+	* template-insert.el (template-insert-file): fixed to use
+	string-replace-match from elib string.el instead of dired funct I
+	had fould.
+
 2001-08-18  Paul Houghton  <pahoughton@users.sourceforge.net>
 
 	* default-el.tmpl:created
