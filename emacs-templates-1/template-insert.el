@@ -166,7 +166,7 @@ Helper functions
 	    (setq tmp-buf (generate-new-buffer "*template temp*"))
 	    (set-buffer tmp-buf)
 	    (template-insert-file tmpl-file)
-	    (setq frag-string (buffer-string tmp-buf))
+	    (setq frag-string (buffer-string))
 	    (kill-buffer tmp-buf)
 	    )
 	  frag-string)
