@@ -46,7 +46,7 @@
 ;;	a template file. See Makefile.tmpl for a usage example.
 ;;	
 
-(or tempalte-doc-desc
+(or template-doc-desc
     (setq template-doc-desc \"\"))
 
 (insert
@@ -54,10 +54,10 @@
   File:		\" file-name \"
   Project:	\" (template-get-project-name)
 		  \" \"
-		  (template-ver-string 'project) \" \"
+		  (template-ver-string 'project) \"
   Desc:
 
-    \" tempalte-doc-desc \"
+    \" template-doc-desc \"
   
   Notes:
     
