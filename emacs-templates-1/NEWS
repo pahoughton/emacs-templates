@@ -1,0 +1,23 @@
+
+* Introduction
+==============
+
+This file describes the user visible changes to EmacsTemplates. See
+the ChangeLog file for detailed revision history information.
+
+If your are viewing this file in emacs, use `C-c C-f' to move to the
+next equal level of outline, and `C-c C-b' to move to previous equal
+level.  `C-h m' will give more info about the Outline mode.  Many
+commands are also available through the menubar.
+
+* Initial Release 1.1.1
+=======================
+
+This is the initial release, please see the README file
+
+
+
+# Local Variables:
+# mode:outline
+# End:
+
