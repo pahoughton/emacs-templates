@@ -1,3 +1,38 @@
+2003-06-01  Paul Houghton  <pahoughton@users.sourceforge.net>
+
+	* template-insert.el (template-insert-file): changed how email
+	address is generated
+
+	* configure.ac: created
+
+	* acinclude.m4: created
+
+	* NEWS: Added File Information trailer
+
+	* Makefile.am: created
+
+	* AUTHORS: created
+
+2003-05-26  Paul Houghton  <pahoughton@users.sourceforge.net>
+
+	* README: created
+
+	* NEWS: created
+
+	* mkinstalldirs: created with automake (1.7.3) -ac
+
+	* missing: created with automake (1.7.3) -ac
+
+	* install-sh: created with automake (1.7.3) -ac
+
+	* elisp-comp: created with automake (1.7.3) -ac
+
+	* INSTALL: created with automake (1.7.3) -ac
+
+	* COPYING: created with automake (1.7.3) -ac
+
+	* elisp-comp: created with automake (1.7.3) -ac
+
 2003-04-22  Paul Houghton 719-527-7834  <paul.houghton@wcom.com>
 
 	* template-insert.el (template-insert-file): fixed to use

@@ -1,0 +1,6 @@
+Makefile.in
+_pkg.el
+aclocal.m4
+auto-autoloads.el
+configure
+custom-load.el
