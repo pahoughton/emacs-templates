@@ -21,7 +21,8 @@
 ;;  $Id$
 ;;
 
-  
+(require 'string)
+ 
 (defgroup templates nil
   "A package for inserting templates based on file or major mode."
   :group 'editing)
@@ -178,7 +179,7 @@ Helper functions
 (defun template-insert-file (tmpl-file)
   "Insert the evaluated contents of the file 'tmpl-file' into the
 current buffer."
-  (let* ( (email (dired-string-replace-match
+  (let* ( (email (string-replace-match
 		  " *\\([^ ]+\\) *"
 		  (user-mail-address)
 		  "<\\1>"))
