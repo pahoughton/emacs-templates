@@ -179,10 +179,7 @@ Helper functions
 (defun template-insert-file (tmpl-file)
   "Insert the evaluated contents of the file 'tmpl-file' into the
 current buffer."
-  (let* ( (email (string-replace-match
-		  " *\\([^ ]+\\) *"
-		  (user-mail-address)
-		  "<\\1>"))
+  (let* ( (email (user-mail-address))
 	  (file-base-name (file-name-sans-extension file-name))
 	  (file-ext (file-name-extension file-name))
 	  (timestamp (format-time-string "%m/%d/%Y %R"))
