@@ -1,0 +1,36 @@
+
+* Introduction
+==============
+
+emacs-templates uses elisp and tempalte files to insert a template into
+the current buffer base on the file name or buffers mode.
+
+* File Information
+==================
+
+#
+# File:		README
+# Project:	emacs-templates 
+# Desc:
+#
+#   Project information
+#
+# Notes:
+#
+# Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
+# Created:     05/26/2003 15:22
+#
+# Revision History: (See end of file for Revision Log)
+#
+#	$Author$
+#	$Date$
+#	$Name$
+#	$Revision$
+#	$State$
+#
+# $Id$
+#
+
+# Local Variables:
+# mode:outline
+# End:
