@@ -75,18 +75,14 @@
     " (template-ver-string 'version) "
     " (template-ver-string 'state) "
 
+    " (template-ver-string 'id) "
 
 **/
 #include \"" include-name "\"
-#include <Str.hh>
 
 #if defined( " (upcase prj-name) "_DEBUG )
 #include \"" class-name ".ii\"
 #endif
-
-"(upcase prj-name) "_VERSION(
-  "class-name",
-  \"" (template-ver-string 'id) "\");
 
 
 "class-name"::"class-name"( void )
@@ -134,7 +130,7 @@ const char *
 const char *
 "class-name"::getVersion( bool withPrjVer ) const
 {
-  return( version.getVer( withPrjVer ) );
+  return( \"" (template-ver-string 'id) "\" );
 }
 
 

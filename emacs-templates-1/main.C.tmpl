@@ -75,43 +75,15 @@
   " (template-ver-string 'id) "
 
 **/
-#include \"" prj-name "Config.hh\"
-#include \"AppParam.hh\"
 
 #include <iostream>
 
-AppParam * App = 0;
 
 
 int
 " func-name "( int argc, char * argv[] )
 {
 
-  if( (App = new AppParam( argc, argv, PROGRAM_INFO_OBJECT ) ) == 0 )
-    {
-      cerr << \"Can't new AppParam.\" << endl;
-      exit( 1 );
-    }
-
-  if( ! (*App).good() || (*App).help() || ! (*App).allArgs() )
-    (*App).abort( 1, true, __FILE__, __LINE__ );
-
-  bool status( true );
-
-  AppInfo << (*App).appName() << \"(\" << (*App).getpid()
-          << \") started.\" << endl;
-
-
-  if( status )
-    AppInfo << (*App).appName() << \"(\" << (*App).getpid()
-            << \") completed.\" << endl;
-  else
-    AppError << (*App).appName() << \"(\" << (*App).getpid()
-             << \") ABROTED(1)!\" << endl;
-
-  delete App;
-
-  return( status ? 0 : 1 );
 }
 
 ")

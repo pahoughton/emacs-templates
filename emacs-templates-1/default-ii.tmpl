@@ -85,13 +85,6 @@
 #endif
 
 inline
-DumpInfo< " class-name " >
-" class-name "::dump( const char * prefix, bool showVer ) const
-{
-  return( DumpInfo< " class-name " >( *this, prefix, showVer ) );
-}
-
-inline
 ostream &
 operator << ( ostream & dest, const "class-name" & obj )
 {
