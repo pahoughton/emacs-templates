@@ -21,7 +21,7 @@
 ;;
 
 
-(or tempalte-doc-desc
+(or template-doc-desc
     (setq template-doc-desc ""))
 
 (insert
@@ -32,16 +32,17 @@
 		  (template-ver-string 'project) "
   Desc:
 
-    " tempalte-doc-desc "
+    " template-doc-desc "
   
   Notes:
     
   Author(s):   " (user-full-name) " " email "
-  Created:     " (timestamp) "
+  Created:     " timestamp "
   
   Revision History: (See ChangeLog for details)
   
     " (template-ver-string 'author) "
+    " (template-ver-string 'tag) "
     " (template-ver-string 'date) "
     " (template-ver-string 'version) "
     " (template-ver-string 'state) "
