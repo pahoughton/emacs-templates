@@ -1,3 +1,7 @@
+2003-06-02  Paul Houghton  <pahoughton@users.sourceforge.net>
+
+	* Makefile.am: fixed XEmacs install target 
+
 2003-06-01  Paul Houghton  <pahoughton@users.sourceforge.net>
 
 	* template-insert.el (template-insert-file): changed how email

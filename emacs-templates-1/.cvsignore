@@ -1,6 +1,10 @@
+Makefile
 Makefile.in
 _pkg.el
 aclocal.m4
 auto-autoloads.el
+autom4te.cache
+config.log
+config.status
 configure
 custom-load.el
