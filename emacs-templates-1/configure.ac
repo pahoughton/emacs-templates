@@ -22,7 +22,10 @@ dnl $Id$
 dnl
 
 AC_PREREQ(2.57)
-AC_INIT( emacs-templates, 1.1.1, Paul Houghton <pahoughton@users.sourceforge.net> )
+AC_INIT( emacs-templates,
+	 1.01,
+	 Paul Houghton <pahoughton@users.sourceforge.net> )
+
 AM_INIT_AUTOMAKE
 
 AC_ARG_VAR( EMACS, which emacs to use (xemacs,emacs) default is xemacs )
