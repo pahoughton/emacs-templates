@@ -80,8 +80,8 @@ ELCS	=	$($(emacs_type)_el_sources:.el=.elc)
 
 
 
-dist_data_DATA	= $(template_files) $(XEmacs_el_sources)
-CLEANFILES	= $(ELCS)
+dist_noinst_DATA	= $(template_files) $(XEmacs_el_sources)
+CLEANFILES		= $(ELCS)
 
 hide = @
 
@@ -109,22 +109,24 @@ $(AUTOLOAD_PATH)/custom-load.el : $(elisp_sources)
 		-f Custom-make-dependencies $(AUTOLOAD_PATH)
 
 XEmacs_install: $(ELCS)
-	$(hide) $(mkinstalldirs) $(DESTDIR)/$(XEmacs_etc_dir)
+	$(hide) $(mkinstalldirs) $(DESTDIR)$(XEmacs_etc_dir)
 	$(hide) for f in $(template_files) ; do		    \
-	  $(INSTALL) -c $f $(DESTDIR)/$(XEmacs_etc_dir) ;   \
-	  echo "Installed $(DESTDIR)/$(XEmacs_etc_dir)/$f"; \
+	  $(INSTALL) $$f $(DESTDIR)$(XEmacs_etc_dir) ;	    \
+	  echo "Installed $(DESTDIR)$(XEmacs_etc_dir)/$$f"; \
 	done
-	$(hide) $(mkinstalldirs) $(DESTDIR)/$(XEmacs_lisp_dir)
-	$(hide) for f in $(ELCS) ; do		    	     \
-	  $(INSTALL) $f $(DESTDIR)/$(XEmacs_lisp_dir) ;      \
-	  echo "Installed $(DESTDIR)/$(XEmacs_lisp_dir)/$f"; \
+	$(hide) $(mkinstalldirs) $(DESTDIR)$(XEmacs_lisp_dir)
+	$(hide) for f in $(XEmacs_el_sources) $(ELCS) ; do   \
+	  $(INSTALL) $$f $(DESTDIR)$(XEmacs_lisp_dir) ;	     \
+	  echo "Installed $(DESTDIR)$(XEmacs_lisp_dir)/$$f"; \
 	done
 
 GNUEmacs_install: $(ELCS)
-	$(hide) $(mkinstalldirs) $(DESTDIR)/$(GNUEmacs_lisp_dir)
-	$(hide) for f in $(template_files) $(ELCS) ; do		    \
-	  $(INSTALL) -c $f $(DESTDIR)/$(GNUEmacs_lisp_dir) ;   \
-	  echo "Installed $(DESTDIR)/$(GNUEmacs_lisp_dir)/$f"; \
+	$(hide) $(mkinstalldirs) $(DESTDIR)$(GNUEmacs_lisp_dir)
+	$(hide) for f in $(template_files)		       \
+			 $(GNUEmacs_el_sources)		       \
+			 $(ELCS) ; do			       \
+	  $(INSTALL) $$f $(DESTDIR)$(GNUEmacs_lisp_dir) ;      \
+	  echo "Installed $(DESTDIR)$(GNUEmacs_lisp_dir)/$$f"; \
 	done
 
 install-data-hook: $(emacs_type)_install
