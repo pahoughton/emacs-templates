@@ -16,6 +16,31 @@ commands are also available through the menubar.
 This is the initial release, please see the README file
 
 
+* File Information
+==================
+
+#
+# File:		NEWS
+# Project:	emacs-templates 
+# Desc:
+#
+#   Information on user visable changes
+#
+# Notes:
+#
+# Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
+# Created:     05/26/2003 15:20
+#
+# Revision History: (See ChangeLog for revision history)
+#
+#	$Author$
+#	$Date$
+#	$Name$
+#	$Revision$
+#	$State$
+#
+# $Id$
+#
 
 # Local Variables:
 # mode:outline
