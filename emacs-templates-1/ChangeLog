@@ -1,5 +1,8 @@
 2003-06-02  Paul Houghton  <pahoughton@users.sourceforge.net>
 
+	* configure.ac: had to change ver num from 1.1.1 to 1.01 because
+	XEmacs autoload generation does not support 3 part version numbers 
+
 	* Makefile.am: fixed XEmacs install target 
 
 2003-06-01  Paul Houghton  <pahoughton@users.sourceforge.net>
