@@ -2,8 +2,8 @@
 * Introduction
 ==============
 
-emacs-templates uses elisp and tempalte files to insert a template into
-the current buffer base on the file name or buffers mode.
+emacs-templates uses elisp and tempalte files to insert a template
+into the current buffer base on the file name or buffers mode.
 
 * File Information
 ==================
