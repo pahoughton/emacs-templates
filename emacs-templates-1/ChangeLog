@@ -1,3 +1,91 @@
+2003-06-06  Paul Houghton  <pahoughton@users.sourceforge.net>
+
+	* Makefile.am: Added find-up-dir.el
+
+	* find-up-dir.el: created 
+
+2003-06-04  Paul Houghton  <pahoughton@users.sourceforge.net>
+
+	* template-insert.el: Fixed to use template dir from generated
+	template-insert-config file.
+	Added template-insert-template-dir funct.
+
+	* main.C.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* get-pkg-basedir.el: created
+
+	* default-xsl.tmpl: Fixed email address
+	Fixed Revision Info line
+	Fixed template Local Variable so it is not recognized when editing
+	the template file.
+
+	* default-xml.tmpl: Fixed email address
+	Fixed Revision Info line
+	Fixed template Local Variable so it is not recognized when editing
+	the template file.
+
+	* default-txt.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-tmpl.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-sql.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-pm.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-pl.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-php.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-java.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-ii.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-hh.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-h.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-el.tmpl: Fixed Revision Info line 
+
+	* README: Fixed Revision Info line
+
+	* default-dtd.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-dtd-block.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-c-block.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* default-C.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* acinclude.m4: Fixed email address
+	Fixed Revision Info line
+
+	* Makefile.am.tmpl: Fixed email address
+	Fixed Revision Info line
+
+	* Makefile.am: Fixed email address;
+	Fixed Revision Info line
+	Added template-insert-config.el which contains the full path to
+	the installation directory.
+	Renamed *_etc_dir vars to *_tmpl_dir
+	Added get-pkg-basedir.el to dist_noinst_DATA files
+	Fixed .el.elc rule to handle template-insert-config
+	Added dep template-insert.elc on template-insert-config.el
+
 2003-06-02  Paul Houghton  <pahoughton@users.sourceforge.net>
 
 	* configure.ac: had to change ver num from 1.1.1 to 1.01 because
@@ -40,7 +128,7 @@
 
 	* elisp-comp: created with automake (1.7.3) -ac
 
-2003-04-22  Paul Houghton 719-527-7834  <paul.houghton@wcom.com>
+2003-04-22  Paul Houghton <pahoughton@users.sourceforge.net>
 
 	* template-insert.el (template-insert-file): fixed to use
 	string-replace-match from elib string.el instead of dired funct I

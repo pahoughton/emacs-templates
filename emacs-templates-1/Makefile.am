@@ -7,10 +7,10 @@
 #
 # Notes:
 #
-# Author(s):   Paul Houghton <paul.houghton@mci.com>
+# Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
 # Created:     05/26/2003 10:05
 #
-# Revision History: (See end of file for Revision Log)
+# Revision Info: (See ChangeLog or cvs log for revision history)
 #
 #	$Author$
 #	$Date$
@@ -44,22 +44,25 @@ template_files =				\
 	default-xsl.tmpl			\
 	main.C.tmpl
 
-elisp_sources	= template-insert.el
+elisp_sources	=				\
+	template-insert.el			\
+	find-up-dir.el
 
 emacs_type	= @pah_emacs_type@
 
 XEmacs_el_sources	=			\
 	$(elisp_sources)			\
+	template-insert-config.el		\
 	$(AUTOLOAD_PATH)/_pkg.el		\
 	$(AUTOLOAD_PATH)/auto-autoloads.el	\
 	$(AUTOLOAD_PATH)/custom-load.el
 
 
-XEmacs_etc_dir	= $(lispdir)/etc/$(PACKAGE_NAME)
+XEmacs_tmpl_dir	= $(lispdir)/etc/$(PACKAGE_NAME)
 XEmacs_lisp_dir	= $(lispdir)/lisp/$(PACKAGE_NAME)
 
 XEmacs_install_dirs	=			\
-	$(XEmacs_etc_dir)			\
+	$(XEmacs_tmpl_dir)			\
 	$(XEmacs_lisp_dir)
 
 PKG_TYPE		= regular
@@ -67,9 +70,11 @@ AUTOLOAD_PATH		= .
 AUTOLOAD_PACKAGE_NAME 	= (setq autoload-package-name \"$(PACKAGE_NAME)\")
 
 
-GNUEmacs_el_sources	= $(elisp_sources)
+GNUEmacs_el_sources	=			\
+	$(elisp_sources)			\
+	template-insert-config.el
 
-GNUEmacs_etc_dir	= $(lispdir)/$(PACKAGE_NAME)
+GNUEmacs_tmpl_dir	= $(lispdir)/$(PACKAGE_NAME)
 GNUEmacs_lisp_dir	= $(lispdir)/$(PACKAGE_NAME)
 
 GNUEmacs_install_dirs	=			\
@@ -80,7 +85,14 @@ ELCS	=	$($(emacs_type)_el_sources:.el=.elc)
 
 
 
-dist_noinst_DATA	= $(template_files) $(XEmacs_el_sources)
+EXTRA_DIST	=				\
+	$(template_files)			\
+	$(elisp_sources)			\
+	$(AUTOLOAD_PATH)/_pkg.el		\
+	$(AUTOLOAD_PATH)/auto-autoloads.el	\
+	$(AUTOLOAD_PATH)/custom-load.el		\
+	get-pkg-basedir.el
+
 CLEANFILES		= $(ELCS)
 
 hide = @
@@ -88,8 +100,18 @@ hide = @
 SUFFIXES = .elc .el
 
 .el.elc:
-	$(EMACS) -batch -q -f batch-byte-compile $^
+	$(EMACS) -batch -q					    \
+		-eval "(setq load-path (append '(\".\") load-path))" \
+		-f batch-byte-compile $^
 
+template-insert-config.el: configure.ac
+	@echo Creating $@
+	$(hide) echo ";; This file is generated DO NOT EDIT" > $@
+	$(hide) echo "(setq template-insert-package-name \"$(PACKAGE_NAME)\")" >> $@
+	$(hide) echo "(setq template-insert-tmpl-dir \"$($(emacs_type)_tmpl_dir)\")" >> $@
+	$(hide) echo "(provide 'template-insert-config)" >> $@
+
+template-insert.elc: template-insert-config.el
 
 $(AUTOLOAD_PATH)/_pkg.el: configure.ac
 	@echo Creating $@
@@ -109,10 +131,10 @@ $(AUTOLOAD_PATH)/custom-load.el : $(elisp_sources)
 		-f Custom-make-dependencies $(AUTOLOAD_PATH)
 
 XEmacs_install: $(ELCS)
-	$(hide) $(mkinstalldirs) $(DESTDIR)$(XEmacs_etc_dir)
+	$(hide) $(mkinstalldirs) $(DESTDIR)$(XEmacs_tmpl_dir)
 	$(hide) for f in $(template_files) ; do		    \
-	  $(INSTALL) $$f $(DESTDIR)$(XEmacs_etc_dir) ;	    \
-	  echo "Installed $(DESTDIR)$(XEmacs_etc_dir)/$$f"; \
+	  $(INSTALL) $$f $(DESTDIR)$(XEmacs_tmpl_dir) ;	    \
+	  echo "Installed $(DESTDIR)$(XEmacs_tmpl_dir)/$$f"; \
 	done
 	$(hide) $(mkinstalldirs) $(DESTDIR)$(XEmacs_lisp_dir)
 	$(hide) for f in $(XEmacs_el_sources) $(ELCS) ; do   \

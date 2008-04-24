@@ -1,16 +1,16 @@
 #
 # File:		acinclude.m4
-# Project:	EmacsTemplates 
+# Project:	emacs-templates 
 # Desc:
 #
 #   Project specific m4 macros
 #
 # Notes:
 #
-# Author(s):   Paul Houghton <paul.houghton@mci.com>
+# Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
 # Created:     06/01/2003 07:07
 #
-# Revision History: (See end of file for Revision Log)
+# Revision Info: (See ChangeLog or cvs log for revision history)
 #
 #	$Author$
 #	$Date$
@@ -52,7 +52,7 @@ AC_DEFUN([PAH_PATH_LISPDIR],
         #  which is non-obvious for non-emacs users.
         # Redirecting /dev/null should help a bit; pity we can't detect "broken"
         #  emacsen earlier and avoid running this altogether.
-        AC_RUN_LOG([$EMACS -batch -q -eval '(progn (load "/home/Paul/prj/Xemacs/EmacsTemplates-1/get-pkg-basedir.el" nil nil t)(princ (get-pkg-basedir)))' 2> /dev/null >conftest.out])
+        AC_RUN_LOG([$EMACS -batch -q -l ${srcdir}/get-pkg-basedir.el -eval '(princ (get-pkg-basedir))' 2> /dev/null >conftest.out])
         pah_cv_lispdir=`echo \`cat conftest.out\``
         rm conftest.out
         if test -z "$pah_cv_lispdir"; then

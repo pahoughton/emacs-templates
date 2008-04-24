@@ -21,18 +21,15 @@
 ;;  $Id$
 ;;
 
+(require 'template-insert-config)
 (require 'string)
- 
+
 (defgroup templates nil
   "A package for inserting templates based on file or major mode."
   :group 'editing)
 
 (defcustom template-dir-list
-  (if (and (fboundp 'locate-data-directory)
-	   (locate-data-directory "template-insert"))
-      (list "." "./.templates" "~/.templates"
-	    (locate-data-directory "template-insert"))
-    (list "." "./.templates" "~/.templates"))
+  (list "." "./.templates" "~/.templates" template-insert-tmpl-dir)
   "*A list of direcotries to search for template files in"
   :group 'templates
   :type '(repeat directory))
@@ -114,6 +111,11 @@
   ))
 
 ;;;###autoload
+(defun template-insert-template-dir ()
+  "Return the installation template directory"
+  (concat template-insert-tmpl-dir))
+
+;;;###autoload
 (defun template-insert ()
   "Insert a template into the current buffer accoding to the buffer
 \(file\) name or mode.
@@ -179,7 +181,7 @@ Helper functions
 (defun template-insert-file (tmpl-file)
   "Insert the evaluated contents of the file 'tmpl-file' into the
 current buffer."
-  (let* ( (email (user-mail-address))
+  (let* ( (email (concat "<" (user-mail-address) ">" ))
 	  (file-base-name (file-name-sans-extension file-name))
 	  (file-ext (file-name-extension file-name))
 	  (timestamp (format-time-string "%m/%d/%Y %R"))
@@ -221,7 +223,3 @@ current buffer."
     tmpl-file))
 
 (provide 'template-insert)
-    
-	  
-
-
