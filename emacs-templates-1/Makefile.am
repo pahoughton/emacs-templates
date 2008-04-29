@@ -122,8 +122,9 @@ $(AUTOLOAD_PATH)/_pkg.el: configure.ac
 
 $(AUTOLOAD_PATH)/auto-autoloads.el : $(elisp_sources) $(AUTOLOAD_PATH)/_pkg.el
 	$(EMACS) $(VANILLA) -batch \
-		-eval "$(AUTOLOAD_PACKAGE_NAME)" 			\
-		-l autoload -f batch-update-directory $(AUTOLOAD_PATH)
+		-l autoload 	\
+		-f batch-update-directory-autoloads \
+		"$(AUTOLOAD_PACKAGE_NAME)" $(AUTOLOAD_PATH)
 	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
 
 $(AUTOLOAD_PATH)/custom-load.el : $(elisp_sources)
