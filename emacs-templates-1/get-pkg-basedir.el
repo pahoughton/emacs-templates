@@ -43,7 +43,7 @@
 		(setq pkg-base-dir tmp-pkg-base-dir)
 	      (setq pkg-base-dir (concat
 				  (getenv "HOME")
-				  "/.xemacs/packages")))))
+				  "/.xemacs/xemacs-packages")))))
     ( ; Not Xemacs
      if (string-match "site-lisp" (car load-path))
 	(setq pkg-base-dir (substring (car load-path) 0 (match-end 0)))
