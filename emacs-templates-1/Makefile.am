@@ -67,7 +67,7 @@ XEmacs_install_dirs	=			\
 
 PKG_TYPE		= regular
 AUTOLOAD_PATH		= .
-AUTOLOAD_PACKAGE_NAME 	= (setq autoload-package-name \"$(PACKAGE_NAME)\")
+AUTOLOAD_PACKAGE_NAME 	= "$(PACKAGE_NAME)"
 
 
 GNUEmacs_el_sources	=			\
