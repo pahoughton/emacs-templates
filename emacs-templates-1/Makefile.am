@@ -104,7 +104,7 @@ SUFFIXES = .elc .el
 		-eval "(setq load-path (append '(\".\") load-path))" \
 		-f batch-byte-compile $^
 
-template-insert-config.el: configure.ac
+template-insert-config.el: config.status
 	@echo Creating $@
 	$(hide) echo ";; This file is generated DO NOT EDIT" > $@
 	$(hide) echo "(setq template-insert-package-name \"$(PACKAGE_NAME)\")" >> $@
