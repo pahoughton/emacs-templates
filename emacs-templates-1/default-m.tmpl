@@ -1,5 +1,5 @@
 ;;
-;;  File:	default-sql.tmpl
+;;  File:	default-C.tmpl
 ;;  Project:	EmacsTemplates 
 ;;  Desc:
 ;;
@@ -8,12 +8,13 @@
 ;;  Notes:
 ;;    
 ;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
-;;  Created:     08/18/2001 22:12
+;;  Created:     02/21/2002 08:24
 ;;  
 ;;  Revision Info: (See ChangeLog or cvs log for revision history)
 ;;  
 ;;	$Author$
 ;;	$Date$
+;;	$Name$
 ;;	$Revision$
 ;;	$State$
 ;;
@@ -46,10 +47,16 @@
 (or template-doc-desc
     (setq template-doc-desc ""))
 
-(insert
+(let* ( (class-name
+	 (replace-in-string file-name "\\.C$" "" ))
+	(include-name
+	 (concat class-name ".hh" ) )
+	(prj-name (template-get-project-name)) )
+
+  (insert
 "/**
   File:		" file-name "
-  Project:	" (template-get-project-name)
+  Project:	" prj-name
 		  " "
 		  (template-ver-string 'project) "
   Desc:
@@ -61,7 +68,8 @@
   Author(s):   " (user-full-name) " " email "
   Created:     " timestamp "
   Copyright:   " copyright "
-  
+               All Rights Reserved
+
   Revision History: (See ChangeLog for details)
   
     " (template-ver-string 'author) "
@@ -70,10 +78,21 @@
     " (template-ver-string 'tag) "
     " (template-ver-string 'state) "
 
-  " (template-ver-string 'id) "
+    " (template-ver-string 'id) "
 
 **/
+#import \"" include-name "\"
+
+
+@implementation "class-name"
+
+
+
+@end
+
 ")
+
+  (beginning-of-buffer) )
 
 ;;; Local Variables:
 ;;; mode:Emacs-Lisp

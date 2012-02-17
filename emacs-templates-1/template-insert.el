@@ -185,6 +185,11 @@ current buffer."
 	  (file-base-name (file-name-sans-extension file-name))
 	  (file-ext (file-name-extension file-name))
 	  (timestamp (format-time-string "%m/%d/%Y %R"))
+	  (copyright (if (getenv "COPYRIGHT")
+			 (concat "Copyright (c) "
+				 (format-time-string "%Y ")
+				 (getenv "COPYRIGHT"))
+		       ""))
 	  (tmp-buf nil)
 	  )
     (save-excursion
