@@ -1,0 +1,23 @@
+# .travis.yml - 2013-10-11 15:52
+#
+# paul4hough@gmail.com
+#
+language: c
+notifications:
+  email:
+    - paul4hough@gmail.com
+
+before_script:
+  - echo -e "Host heroku.com StrictHostKeyChecking no\n" >> ~/.ssh/config
+  - echo -e "Host github.com StrictHostKeyChecking no\n" >> ~/.ssh/config
+  - uname -a
+  - sudo bash setup-product.bash
+  - autoconf --version
+  - env
+
+script:
+  - autoreconf
+  - ./configure
+  - make test-system
+  - make install
+  

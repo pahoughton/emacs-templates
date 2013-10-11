@@ -13,3 +13,4 @@ template-insert-config.el
 emacs-templates*tar.gz
 /test_tmp
 *.elc
+loaddefs.el
