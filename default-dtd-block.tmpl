@@ -1,26 +1,14 @@
 ;;
 ;;  File:	default-dtd-block.tmpl
-;;  Project:	XEmacsTemplates 
+;;  Project:	Xemacs-templates
 ;;  Desc:
 ;;
 ;;	Emacs Lisp source
-;;  
+;;
 ;;  Notes:
-;;    
-;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
+;;
+;;  Author(s):   Paul Houghton <paul4hough@gmail.com>
 ;;  Created:     05/24/2002 09:10
-;;  
-;;  Revision Info: (See ChangeLog or cvs log for revision history)
-;;  
-;;	$Author$
-;;	$Date$
-;;	$Name$
-;;	$Revision$
-;;	$State$
-;;
-;;  $Id$
-;;
-
 
 ;;
 ;; Available Template Variables:
@@ -42,7 +30,7 @@
 ;;  (template-insert-fragment tmpl-file)
 ;;	Return a string containing the processed contents of
 ;;	a template file. See Makefile.tmpl for a usage example.
-;;	
+;;
 
 
 (or template-doc-desc
@@ -50,28 +38,9 @@
 
 (insert
 "<!-- ============================================================
-  File:		" file-name "
-  Project:	" (template-get-project-name)
-		  " "
-		  (template-ver-string 'project) "
-  Desc:
+ " file-name " - " timestamp "
 
-    " template-doc-desc "
-  
-  Notes:
-    
-  Author(s):   " (user-full-name) " " email "
-  Created:     " timestamp "
-  
-  Revision History: (See ChangeLog for details)
-  
-    " (template-ver-string 'author) "
-    " (template-ver-string 'date) "
-    " (template-ver-string 'version) "
-    " (template-ver-string 'state) "
-
-  " (template-ver-string 'id) "
-
+ " copyright "
  ============================================================ -->
 ")
 

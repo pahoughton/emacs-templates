@@ -7,24 +7,14 @@
 #
 # Notes:
 #
-# Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
+# Author(s):   Paul Houghton <paul4hough@gmail.com>
 # Created:     06/01/2003 07:07
-#
-# Revision Info: (See ChangeLog or cvs log for revision history)
-#
-#	$Author$
-#	$Date$
-#	$Name$
-#	$Revision$
-#	$State$
-#
-# $Id$
 #
 
 AC_DEFUN([PAH_PROG_EMACS],
 [ AC_CACHE_SAVE
   test x"$EMACS" = xt && EMACS=
-  AC_CHECK_PROGS(EMACS, xemacs emacs, no)
+  AC_CHECK_PROGS(EMACS, emacs xemacs, no)
   AC_CACHE_CHECK([which version of emacs],pah_cv_emacs_type,
     [ if test $EMACS != "no"; then
         AC_RUN_LOG([$EMACS -batch -q -eval '(if (string-match "XEmacs\\|Lucid" emacs-version)(princ "XEmacs")(princ "GNUEmacs"))' 2> /dev/null > conftest.out])

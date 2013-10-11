@@ -1,0 +1,10 @@
+(load-file "../../test_tmp/emacs-test-simple/test-simple.el")
+(setq debug-on-error t)
+(setq load-path (append '("../..") load-path))
+(test-simple-start "test for find-up-dir.el")
+(assert-t (load-file "../../find-up-dir.el")
+	  "require template-insert.el failed")
+(assert-equal "/usr"
+	      (find-up-dir "share" "/usr/share/man/man8")
+	      "find-up-dir share not in /usr/share/man/man8")
+(end-tests)

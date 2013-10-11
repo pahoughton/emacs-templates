@@ -1,10 +1,14 @@
-2003-06-06  Paul Houghton  <pahoughton@users.sourceforge.net>
+2003-06-06  Paul Houghton  <paul4hough@gmail.com>
+	
+	* ChangeLog: See git log for future change information.
+
+2003-06-06  Paul Houghton  <paul4hough@gmail.com>
 
 	* Makefile.am: Added find-up-dir.el
 
 	* find-up-dir.el: created 
 
-2003-06-04  Paul Houghton  <pahoughton@users.sourceforge.net>
+2003-06-04  Paul Houghton  <paul4hough@gmail.com>
 
 	* template-insert.el: Fixed to use template dir from generated
 	template-insert-config file.
@@ -86,14 +90,14 @@
 	Fixed .el.elc rule to handle template-insert-config
 	Added dep template-insert.elc on template-insert-config.el
 
-2003-06-02  Paul Houghton  <pahoughton@users.sourceforge.net>
+2003-06-02  Paul Houghton  <paul4hough@gmail.com>
 
 	* configure.ac: had to change ver num from 1.1.1 to 1.01 because
 	XEmacs autoload generation does not support 3 part version numbers 
 
 	* Makefile.am: fixed XEmacs install target 
 
-2003-06-01  Paul Houghton  <pahoughton@users.sourceforge.net>
+2003-06-01  Paul Houghton  <paul4hough@gmail.com>
 
 	* template-insert.el (template-insert-file): changed how email
 	address is generated
@@ -108,7 +112,7 @@
 
 	* AUTHORS: created
 
-2003-05-26  Paul Houghton  <pahoughton@users.sourceforge.net>
+2003-05-26  Paul Houghton  <paul4hough@gmail.com>
 
 	* README: created
 
@@ -128,13 +132,13 @@
 
 	* elisp-comp: created with automake (1.7.3) -ac
 
-2003-04-22  Paul Houghton <pahoughton@users.sourceforge.net>
+2003-04-22  Paul Houghton <paul4hough@gmail.com>
 
 	* template-insert.el (template-insert-file): fixed to use
 	string-replace-match from elib string.el instead of dired funct I
 	had fould.
 
-2001-08-18  Paul Houghton  <pahoughton@users.sourceforge.net>
+2001-08-18  Paul Houghton  <paul4hough@gmail.com>
 
 	* default-el.tmpl:created
 
@@ -153,14 +157,14 @@
 	(template-insert-file): fixed email variable - user-mail-address
 	had a leading space that needed to bestripted.
 
-2001-08-18  Paul Houghton  <pahoughton@users.sourceforge.net>
+2001-08-18  Paul Houghton  <paul4hough@gmail.com>
 
 	* template-insert.el: First working version.
 
 	* default-txt.tmpl: created
 
-2001-08-17  Paul Houghton  <pahoughton@users.sourceforge.net>
+2001-08-17  Paul Houghton  <paul4hough@gmail.com>
 
 	* template-insert.el: created
-	
+
 

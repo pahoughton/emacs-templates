@@ -1,79 +1,20 @@
 ;;
 ;;  File:	default-sql.tmpl
-;;  Project:	EmacsTemplates 
+;;  Project:	emacs-templates
 ;;  Desc:
 ;;
 ;;	Emacs Lisp source
-;;  
-;;  Notes:
-;;    
-;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
+;;
+;;  Author(s):   Paul Houghton <paul4hough@gmail.com>
 ;;  Created:     08/18/2001 22:12
-;;  
-;;  Revision Info: (See ChangeLog or cvs log for revision history)
-;;  
-;;	$Author$
-;;	$Date$
-;;	$Revision$
-;;	$State$
 ;;
-;;  $Id$
-;;
-
-
-;;
-;; Available Template Variables:
-;;
-;;  file-name
-;;  file-base-name
-;;  file-ext
-;;  email
-;;  timestamp
-;;
-;; Available Template Functions
-;;
-;;  (template-ver-string  tag)
-;;	where tag can be one of:
-;;	    'project | 'author | 'date | 'version | 'state | 'id | 'log
-;;
-;;  (template-get-project-name)
-;;
-;;  (template-insert-fragment tmpl-file)
-;;	Return a string containing the processed contents of
-;;	a template file. See Makefile.tmpl for a usage example.
-;;	
 
 (or template-doc-desc
     (setq template-doc-desc ""))
 
 (insert
-"/**
-  File:		" file-name "
-  Project:	" (template-get-project-name)
-		  " "
-		  (template-ver-string 'project) "
-  Desc:
-
-    " template-doc-desc "
-  
-  Notes:
-    
-  Author(s):   " (user-full-name) " " email "
-  Created:     " timestamp "
-  Copyright:   " copyright "
-  
-  Revision History: (See ChangeLog for details)
-  
-    " (template-ver-string 'author) "
-    " (template-ver-string 'date) "
-    " (template-ver-string 'version) "
-    " (template-ver-string 'tag) "
-    " (template-ver-string 'state) "
-
-  " (template-ver-string 'id) "
-
-**/
-")
+ (template-insert-fragment "default-c-block.tmpl")
+)
 
 ;;; Local Variables:
 ;;; mode:Emacs-Lisp

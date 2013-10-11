@@ -1,0 +1,21 @@
+;;
+;; default-hm.tmpl - 2013-10-10 23:24
+;;
+;; Copyright (c) 2013 Paul Houghton <paul4hough@gmail.com>
+;;
+
+(insert
+ (template-insert-fragment "default-c-block.tmpl") "
+#import <Cocoa/Cocoa.h>
+
+@interface " file-base-name" : NSObject
+
+@end
+")
+
+(beginning-of-buffer)
+
+;;; Local Variables:
+;;; mode:Emacs-Lisp
+;;; end:
+

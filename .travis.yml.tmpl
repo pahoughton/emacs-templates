@@ -1,0 +1,35 @@
+;;
+;; .travis.yml.tmpl - 2013-10-11 00:37
+;;
+;; Copyright (c) 2013 Paul Houghton <paul4hough@gmail.com>
+
+
+(insert
+"
+language: ?????
+notifications:
+  email:
+    - " user-mail-address "
+
+before_script:
+  - echo -e \"Host heroku.com\n\tStrictHostKeyChecking no\\n\" >> ~/.ssh/config
+  - echo -e \"Host github.com\n\tStrictHostKeyChecking no\\n\" >> ~/.ssh/config
+  - uname -a
+  - sudo bash setup-product.bash
+  - autoconf --version
+  - env
+
+script:
+  - autoreconf
+  - ./configure
+  - make test-system
+  - make install
+  
+")
+(beginning-of-buffer)
+
+
+;;; Local Variables:
+;;; mode:Emacs-Lisp
+;;; end:
+

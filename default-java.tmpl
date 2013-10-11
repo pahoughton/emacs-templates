@@ -1,54 +1,17 @@
 ;;
 ;;  File:	default-java.tmpl
-;;  Project:	EmacsTemplates 
+;;  Project:	emacs-templates
 ;;  Desc:
 ;;
 ;;	Emacs Lisp source
-;;  
-;;  Notes:
-;;    
-;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
+;;
+;;  Author(s):   Paul Houghton <paul4hough@gmail.com>
 ;;  Created:     08/19/2001 20:54
-;;  
-;;  Revision Info: (See ChangeLog or cvs log for revision history)
-;;  
-;;	$Author$
-;;	$Date$
-;;	$Revision$
-;;	$State$
-;;
-;;  $Id$
-;;
-
-
-;;
-;; Available Template Variables:
-;;
-;;  file-name
-;;  file-base-name
-;;  file-ext
-;;  email
-;;  timestamp
-;;
-;; Available Template Functions
-;;
-;;  (template-ver-string  tag)
-;;	where tag can be one of:
-;;	    'project | 'author | 'date | 'version | 'state | 'id | 'log
-;;
-;;  (template-get-project-name)
-;;
-;;  (template-insert-fragment tmpl-file)
-;;	Return a string containing the processed contents of
-;;	a template file. See Makefile.tmpl for a usage example.
-;;	
 
 (or template-doc-desc
     (setq template-doc-desc (concat "Java source for " file-base-name) ))
 
-(insert
-(template-insert-fragment "default-c-block.tmpl")
-)
+(insert (template-insert-fragment "default-c-block.tmpl"))
 
 ;;; Local Variables:
 ;;; mode:Emacs-Lisp

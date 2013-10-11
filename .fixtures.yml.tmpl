@@ -1,0 +1,21 @@
+;;
+;; default-C.tmpl - 2013-10-11 00:29 
+;;
+;; Copyright (c) 2013 Paul Houghton <paul4hough@gmail.com>
+
+
+(let* ( (prj-name (file-name-nondirectory (substring default-directory 0 -1)))
+	)
+
+  (insert
+"fixtures:
+  symlinks:
+    " prj-name ": \"#{source_dir}\"
+")
+  (beginning-of-buffer)
+  )
+
+;;; Local Variables:
+;;; mode:Emacs-Lisp
+;;; end:
+

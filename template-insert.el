@@ -1,32 +1,36 @@
 ;;
 ;;  File:	template-insert.el
-;;  Project:	EmacsTemplates
+;;  Project:	emacs-templates
 ;;  Desc:
 ;;
 ;;	Insert a template into the current buffer.
-;;  
-;;  Notes:
-;;    
-;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
-;;  Created:     08/17/2001 13:20
-;;  
-;;  Revision History: (See ChangeLog for Details
-;;  
-;;	$Author$
-;;	$Name$
-;;	$Date$
-;;	$Revision$
-;;	$State$
 ;;
-;;  $Id$
+;;  Author(s):   Paul Houghton <paul4hough@gmail.com>
+;;  Created:     08/17/2001 13:20
 ;;
 
 (require 'template-insert-config)
-(require 'string)
+(require 'find-up-dir)
 
 (defgroup templates nil
   "A package for inserting templates based on file or major mode."
   :group 'editing)
+
+(defcustom template-travis-user "pahoughton"
+  "*Default travis user id for README.md"
+  :group 'templates
+  :type 'string)
+
+(defcustom template-coderwall-user "pahoughton"
+  "*Default coderwall user id for README.md"
+  :group 'templates
+  :type 'string)
+
+(defcustom template-github-user "pahoughton"
+  "*Default github user id for README.md"
+  :group 'templates
+  :type 'string)
+
 
 (defcustom template-dir-list
   (list "." "./.templates" "~/.templates" template-insert-tmpl-dir)
@@ -39,10 +43,11 @@
   :group 'templates
   :type 'string)
 
-(defcustom template-ver-mgmt 'cvs
+(defcustom template-ver-mgmt 'git
   "Version management tags to use"
   :group 'templates
-  :type '(choice (const :tag "CVS" cvs)
+  :type '(choice (const :tag "git" git)
+		 (const :tag "CVS" cvs)
 		 (const :tag "Dimensions" dim)))
 
 (defcustom template-fn-tmpl-alist nil
@@ -86,7 +91,7 @@
 		 (log		. (concat "%PL%")))))
       )
 
-      
+
 (defvar template-history nil
   "This is the minibuffer history for the insert-template funtion." )
 
@@ -122,9 +127,11 @@
 
 Helper vars:
 
-    file-name
+    file-base-name
+    file-ext
     email
     timestamp
+    copyright
 
 Helper functions
     `template-ver-string'
@@ -132,8 +139,9 @@ Helper functions
 
 "
   (interactive)
-  (let* ( (file-name (file-name-nondirectory (buffer-file-name)))
-	  (tmpl (template-find-tmpl file-name))
+  (let* ( (buf-file-full-name (buffer-file-name))
+	  (tmpl (template-find-tmpl
+		 (file-name-nondirectory buf-file-full-name)))
 	  )
     (if (not tmpl)
 	(let* ( (txt-tmpl (locate-file (concat "default-txt"
@@ -148,14 +156,15 @@ Helper functions
     (if tmpl
 	(progn
 	  (setq template-doc-desc nil)
-	  (template-insert-file tmpl)
+	  (template-insert-file tmpl buf-file-full-name)
 	  )
-      (error 'file-error (list (concat "Could not find default-txt"
-				       template-ext)
-			       "in"
-			       template-dir-list)))
+      (error  (concat "Could not find default-txt"
+		      template-ext
+		      " in "
+		      (prin1-to-string template-dir-list))))
     )
   )
+  
 
 (defun template-insert-fragment (tmpl)
   "Insert the contents 'tmpl' as part of a template"
@@ -163,40 +172,73 @@ Helper functions
 	  (tmp-buf nil)
 	  )
     (if tmpl-file
-	(let* ( (frag-string nil) )
-	  (save-excursion
-	    (setq tmp-buf (generate-new-buffer "*template temp*"))
-	    (set-buffer tmp-buf)
-	    (template-insert-file tmpl-file)
-	    (setq frag-string (buffer-string))
-	    (kill-buffer tmp-buf)
-	    )
-	  frag-string)
-      (error 'file-error (list "Could not find "
-			       tmpl
-			       "in"
-			       template-dir-list))))
+	(progn
+	 
+	  (message (concat "Inserting template fragment: " tmpl-file))
+	  (let* ( (frag-string nil)
+		  (buf-file-full-name (buffer-file-name))
+		  )
+	    (save-excursion
+	      (setq tmp-buf (generate-new-buffer "*template frag temp*"))
+	      (set-buffer tmp-buf)
+	      (template-insert-file tmpl-file buf-file-full-name)
+	      (setq frag-string (buffer-string))
+	      (kill-buffer tmp-buf)
+	      )
+	    frag-string)
+	  )
+      (error (concat "Could not find "
+		     tmpl
+		     " in "
+		     (prin1-to-string template-dir-list)))))
   )
-  
-(defun template-insert-file (tmpl-file)
+
+(defun template-product-dir-name (full-fn)
+  "find and return the product's top level directory name.
+
+given template-ver-mgmt is git then look for .git directory
+given not found yet then look for one of the files configure.ac,
+LICENSE, README.md and README.
+"
+  (let* ( (top-file-list '("configure.ac", "LICENSE", "README.md", "README"))
+	  (iter 0)
+	  (found-dir nil)
+	  )
+    (if (eq template-ver-mgmt "git")
+	(setq found-dir (find-up-dir ".git" full-fn)))
+    (while (and (not found-dir) (< iter (length top-file-list)))
+      (setq found-dir (find-up-dir (elt top-file-list iter) full-fn))
+      (message "fn %s - %s" (elt top-file-list iter) found-dir)
+      )
+    found-dir))
+
+(defun template-insert-file (tmpl-file buf-file-full-name)
   "Insert the evaluated contents of the file 'tmpl-file' into the
 current buffer."
-  (let* ( (email (concat "<" (user-mail-address) ">" ))
+  (let* ( (email (concat "<" user-mail-address ">" ))
+	  (file-name (file-name-nondirectory buf-file-full-name))
 	  (file-base-name (file-name-sans-extension file-name))
 	  (file-ext (file-name-extension file-name))
-	  (timestamp (format-time-string "%m/%d/%Y %R"))
+	  (product-dir-name (file-name-nondirectory
+			     (template-product-dir-name buf-file-full-name)))
+	  (timestamp (format-time-string "%Y-%m-%d %R"))
 	  (copyright (if (getenv "COPYRIGHT")
 			 (concat "Copyright (c) "
 				 (format-time-string "%Y ")
 				 (getenv "COPYRIGHT"))
-		       ""))
+		       
+		       (concat "Copyright (c) "
+			       (format-time-string "%Y ")
+			       (user-full-name)
+			       " " email )))
 	  (tmp-buf nil)
 	  )
+    (message (concat "Inserting template: " tmpl-file))
     (save-excursion
       (setq tmp-buf (generate-new-buffer "*template temp*"))
       (set-buffer tmp-buf)
       (insert-file-contents tmpl-file))
-    
+
     (eval-buffer tmp-buf)
     (kill-buffer tmp-buf)))
 

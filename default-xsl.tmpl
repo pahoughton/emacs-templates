@@ -1,83 +1,26 @@
 ;;
 ;;  File:	default-xsl.tmpl
-;;  Project:	EmacsTemplates 
+;;  Project:	emacs-templates
 ;;  Desc:
 ;;
 ;;	Emacs Lisp source
-;;  
-;;  Notes:
-;;    
-;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
+;;
+;;  Author(s):   Paul Houghton <paul4hough@gmail.com>
 ;;  Created:     05/29/2002 06:28
-;;  
-;;  Revision Info: (See ChangeLog or cvs log for revision history)
-;;  
-;;	$Author$
-;;	$Date$
-;;	$Name$
-;;	$Revision$
-;;	$State$
-;;
-;;  $Id$
-;;
 
-
-;;
-;; Available Template Variables:
-;;
-;;  file-name
-;;  file-base-name
-;;  file-ext
-;;  email
-;;  timestamp
-;;
-;; Available Template Functions
-;;
-;;  (template-ver-string  tag)
-;;	where tag can be one of:
-;;	    'project | 'author | 'date | 'version | 'state | 'id | 'log
-;;
-;;  (template-get-project-name)
-;;
-;;  (template-insert-fragment tmpl-file)
-;;	Return a string containing the processed contents of
-;;	a template file. See Makefile.tmpl for a usage example.
-;;	
 
 (or template-doc-desc
     (setq template-doc-desc ""))
 
-(let* ( ( basefn (replace-in-string file-name "\\.xsl$" "" )))
 (insert
 "<?xml version=\"1.0\" encoding=\"US-ASCII\"?>
 <!DOCTYPE xsl:stylesheet
    PUBLIC \"-//W3C//DTD XSLT Stlyesheet//EN\"
 	  \"w3c/xsl.dtd\" >
-<!-- =============================================================
-
-  Title:    " file-name "
-  Project:  " (template-get-project-name)
-		  " "
-		  (template-ver-string 'project) "
-  Desc:
-
-    " template-doc-desc "
-
-  Notes:
-
-  Author(s): " (user-full-name) " " email "
-  Created:   " timestamp "
-  
-  Revision History: (See ChangeLog for details)
-  
-    " (template-ver-string 'author) "
-    " (template-ver-string 'date) "
-    " (template-ver-string 'version) "
-    " (template-ver-string 'state) "
-
-  " (template-ver-string 'id) "
-
- ============================================================= -->
+<!--
+ " file-name "
+ " copyright "
+-->
 
 <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">
 
@@ -85,82 +28,7 @@
 	      doctype-public=\"-//W3C//DTD HTML 3.2 Final//EN\"/>
 
   <xsl:param name=\"SUBDIR.INDEX\">/index.html</xsl:param>
-  
-  <xsl:template match=\"/\">
-    <xsl:comment>#include virtual=\"/source/contactinfo.html\"</xsl:comment>
-    <xsl:apply-templates/>
-  </xsl:template>
 
-  <xsl:template match=\"/" basefn "\">
-    <xsl:apply-templates select=\"dochead\"/>
-    <xsl:element name=\"html\">
-      <xsl:element name=\"head\">
-	<xsl:element name=\"title\">
-	  <xsl:apply-templates select=\"dochead/title\"/>
-	</xsl:element>
-	<xsl:comment>#include virtual=\"/source/csstext.html\"</xsl:comment>
-	<xsl:element name=\"META\">
-	  <xsl:attribute name=\"NAME\">description</xsl:attribute>
-	  <xsl:attribute name=\"CONTENT\">
-	    <xsl:apply-templates select=\"dochead/docdesc\"/>
-	  </xsl:attribute>
-	</xsl:element>
-	<xsl:element name=\"META\">
-	  <xsl:attribute name=\"NAME\">keywords</xsl:attribute>
-	  <xsl:attribute name=\"CONTENT\">
-	    <xsl:apply-templates select=\"dochead/keywords\"/>
-	  </xsl:attribute>
-	</xsl:element>
-      </xsl:element> <!-- head -->
-      <xsl:element name=\"body\">
-	<xsl:attribute name=\"bgcolor\">white</xsl:attribute>
-	<xsl:element name=\"table\">
-	  <xsl:attribute name=\"border\">0</xsl:attribute>
-	  <xsl:attribute name=\"width\">600</xsl:attribute>
-	  <xsl:element name=\"tr\">
-	    <xsl:element name=\"td\">
-	      <xsl:comment>#include virtual=\"/source/header1.html\"
-	      </xsl:comment>
-	    </xsl:element>
-	  </xsl:element>
-	  <xsl:element name=\"tr\">
-	    <xsl:element name=\"td\">
-	      <xsl:element name=\"center\">
-		<xsl:element name=\"font\">
-		  <xsl:attribute name=\"size\">+2</xsl:attribute>
-		  <xsl:element name=\"b\">
-		    <xsl:apply-templates select=\"dochead/title\"/>
-		  </xsl:element>
-		</xsl:element>
-	      </xsl:element>
-	      <xsl:element name=\"br\"></xsl:element>
-	      <xsl:apply-templates select=\"dochead/subtitle\"/>
-	      <xsl:element name=\"p\">
-		<xsl:apply-templates select=\"dochead/docdesc\"/>
-	      </xsl:element>
-<!-- Apply Document Body Elements Here -->
-	      <xsl:apply-templates select=\"FIXME\"/>
-<!-- End Document Body Elements -->
-	    </xsl:element>
-	  </xsl:element> <!-- tr -->
-	  <xsl:element name=\"tr\">
-	    <xsl:element name=\"td\">
-	      <xsl:comment>#include virtual=\"/source/footer1.html\"
-	      </xsl:comment>
-	    </xsl:element>
-	  </xsl:element> <!-- tr -->
-	</xsl:element> <!-- table -->
-      </xsl:element> <!-- body -->
-    </xsl:element> <!-- html -->
-  </xsl:template>
-
-
-
-  <xsl:include href=\"dochead.xsl\"/>
-  <xsl:include href=\"links.xsl\"/>
-  <xsl:include href=\"blocks.xsl\"/>
-  <xsl:include href=\"markup.xsl\"/>
-  
 </xsl:stylesheet>
 
 
@@ -170,7 +38,7 @@
 <!-- mode:xml -->
 <!-- End: -->
 ")
-)
+
 ;;; Local Variables:
 ;;; mode:Emacs-Lisp
 ;;; end:

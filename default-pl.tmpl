@@ -1,25 +1,13 @@
 ;;
 ;;  File:	default-pl.tmpl
-;;  Project:	EmacsTemplates 
+;;  Project:	emacs-templates
 ;;  Desc:
 ;;
 ;;	Emacs Lisp source
 ;;
-;;  Notes:
-;;    
-;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
+;;  Author(s):   Paul Houghton <paul4hough@gmail.com>
 ;;  Created:     08/18/2001 11:10
-;;  
-;;  Revision Info: (See ChangeLog or cvs log for revision history)
-;;  
-;;	$Author$
-;;	$Date$
-;;	$Revision$
-;;	$State$
 ;;
-;;  $Id$
-;;
-
 
 ;;
 ;; Available Template Variables:
@@ -41,12 +29,12 @@
 ;;  (template-insert-fragment tmpl-file)
 ;;	Return a string containing the processed contents of
 ;;	a template file. See Makefile.tmpl for a usage example.
-;;	
+;;
 
 (or template-doc-desc
     (setq template-doc-desc ""))
 
-(insert "#!" (getenv "TOOL_DIR") "/bin/perl
+(insert "#!/usr/bin/perl
 " (template-insert-fragment "default-txt.tmpl") "
 eval 'exec perl -w -S $0 ${1+\"$@\"}'
     if 0 ;
@@ -80,8 +68,6 @@ my $smk_config = new SMK::Config;
 #
 
 package " file-base-name ";
-
-
 
 ## Local Variables:
 ## mode:perl

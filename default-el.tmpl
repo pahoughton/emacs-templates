@@ -1,55 +1,20 @@
 ;;
 ;;  File:	default-el.tmpl
-;;  Project:	EmacsTemplates
+;;  Project:	emacs-templates
 ;;  Desc:
 ;;
 ;;	The default template for an Emacs Lisp Source file (.el)
 ;;
-;;  Notes:
-;;    
-;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
+;;  Author(s):   Paul Houghton <paul4hough@gmail.com>
 ;;  Created:     08/17/2001 13:20
-;;  
-;;  Revision History: (See ChangeLog for Details
-;;  
-;;	$Author$
-;;	$Name$
-;;	$Date$
-;;	$Revision$
-;;	$State$
-;;
-;;  $Id$
-;;
 
-
-(insert 
+(insert
 ";;
-;;  File:	" file-name "
-;;  Project:	" (template-get-project-name)
-		  " "
-		  (template-ver-string 'project) "
-;;  Desc:
+;; " file-name " - " timestamp "
 ;;
-;;	Emacs Lisp source
-;;  
-;;  Notes:
-;;    
-;;  Author(s):   " (user-full-name) " <" email ">
-;;  Created:     " timestamp "
-;;  
-;;  Revision Info: (See ChangeLog or cvs log for revision history)
-;;  
-;;	" (template-ver-string 'author) "
-;;	" (template-ver-string 'date) "
-;;	" (template-ver-string 'tag) "
-;;	" (template-ver-string 'version) "
-;;	" (template-ver-string 'state) "
-;;
-;;  " (template-ver-string 'id) "
-;;
+;; " copyright "
 
 ")
-
 
 ;;; Local Variables:
 ;;; mode:Emacs-Lisp

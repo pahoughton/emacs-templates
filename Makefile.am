@@ -1,49 +1,17 @@
 #
 # File:		Makefile.am
-# Project:	EmacsTemplates 
+# Project:	emacs-templates
 # Desc:
 #
 #   automake source for Makefile.in
 #
-# Notes:
-#
-# Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
+# Author(s):   Paul Houghton <paul4hough@gmail.com>
 # Created:     05/26/2003 10:05
 #
-# Revision Info: (See ChangeLog or cvs log for revision history)
-#
-#	$Author$
-#	$Date$
-#	$Name$
-#	$Revision$
-#	$State$
-#
-# $Id$
-#
 
+SUBDIRS	= tests/unit tests/system
 
-template_files =				\
-	Makefile.am.tmpl			\
-	Makefile.tmpl				\
-	default-C.tmpl				\
-	default-c-block.tmpl			\
-	default-dtd-block.tmpl			\
-	default-dtd.tmpl			\
-	default-el.tmpl				\
-	default-h.tmpl				\
-	default-hh.tmpl				\
-	default-ii.tmpl				\
-	default-java.tmpl			\
-	default-m.tmpl				\
-	default-php.tmpl			\
-	default-pl.tmpl				\
-	default-pm.tmpl				\
-	default-sql.tmpl			\
-	default-tmpl.tmpl			\
-	default-txt.tmpl			\
-	default-xml.tmpl			\
-	default-xsl.tmpl			\
-	main.C.tmpl
+template_files = $(wildcard *.tmpl)
 
 elisp_sources	=				\
 	template-insert.el			\
@@ -53,10 +21,7 @@ emacs_type	= @pah_emacs_type@
 
 XEmacs_el_sources	=			\
 	$(elisp_sources)			\
-	template-insert-config.el		\
-	$(AUTOLOAD_PATH)/_pkg.el		\
-	$(AUTOLOAD_PATH)/auto-autoloads.el	\
-	$(AUTOLOAD_PATH)/custom-load.el
+	template-insert-config.el
 
 
 XEmacs_tmpl_dir	= $(lispdir)/etc/$(PACKAGE_NAME)
@@ -89,9 +54,7 @@ ELCS	=	$($(emacs_type)_el_sources:.el=.elc)
 EXTRA_DIST	=				\
 	$(template_files)			\
 	$(elisp_sources)			\
-	$(AUTOLOAD_PATH)/_pkg.el		\
-	$(AUTOLOAD_PATH)/auto-autoloads.el	\
-	$(AUTOLOAD_PATH)/custom-load.el		\
+	subdirs.el				\
 	get-pkg-basedir.el
 
 CLEANFILES		= $(ELCS)
@@ -114,23 +77,16 @@ template-insert-config.el: config.status
 
 template-insert.elc: template-insert-config.el
 
-$(AUTOLOAD_PATH)/_pkg.el: configure.ac
-	@echo Creating $@
-	@echo ";;;###autoload" > $@
-	@echo "(package-provide '$(PACKAGE_NAME)" >> $@
-	@echo "		 :version $(VERSION)" >> $@
-	@echo "		 :type '$(PKG_TYPE))" >> $@
+loaddefs.el: $(elisp_sources) template-insert-config.el
+	$(hide)$(EMACS) $(VANILLA) -batch	\
+		--no-site-file 			\
+		-l autoload			\
+		 --eval '(setq generated-autoload-file (concat (file-name-directory (file-truename "Makefile.am")) "loaddefs.el"))' \
+		-f batch-update-autoloads .
 
-$(AUTOLOAD_PATH)/auto-autoloads.el : $(elisp_sources) $(AUTOLOAD_PATH)/_pkg.el
-	$(EMACS) $(VANILLA) -batch \
-		-l autoload 	\
-		-f batch-update-directory \
-		 $(AUTOLOAD_PATH)
-	@rm -f $(AUTOLOAD_PATH)/auto-autoloads.el~
-
-$(AUTOLOAD_PATH)/custom-load.el : $(elisp_sources)
-	$(EMACS) $(VANILLA) -batch -l cus-dep 				\
-		-f Custom-make-dependencies $(AUTOLOAD_PATH)
+cus-load.el: $(elisp_sources)
+	$(hide)$(EMACS) $(VANILLA) -batch -l cus-dep 	\
+		-f custom-make-dependencies .
 
 XEmacs_install: $(ELCS)
 	$(hide) $(mkinstalldirs) $(DESTDIR)$(XEmacs_tmpl_dir)
@@ -144,13 +100,36 @@ XEmacs_install: $(ELCS)
 	  echo "Installed $(DESTDIR)$(XEmacs_lisp_dir)/$$f"; \
 	done
 
-GNUEmacs_install: $(ELCS)
+GNUEmacs_install: $(ELCS) loaddefs.el
 	$(hide) $(mkinstalldirs) $(DESTDIR)$(GNUEmacs_lisp_dir)
 	$(hide) for f in $(template_files)		       \
 			 $(GNUEmacs_el_sources)		       \
 			 $(ELCS) ; do			       \
-	  $(INSTALL) $$f $(DESTDIR)$(GNUEmacs_lisp_dir) ;      \
+	  $(INSTALL) "$$f" $(DESTDIR)$(GNUEmacs_lisp_dir) || exit 1 ;      \
 	  echo "Installed $(DESTDIR)$(GNUEmacs_lisp_dir)/$$f"; \
 	done
+	$(hide) $(INSTALL) subdirs.el "$(lispdir)"
+	@echo "Installed $(lispdir)/subdirs.el"
+	$(hide)if [ -f "$(lispdir)/loaddefs.el" ] ; then	\
+	  mv "$(lispdir)/loaddefs.el" 				\
+	     "$(lispdir)/loaddefs.el.bak" &&     		\
+	  cat "$(lispdir)/loaddefs.el.bak" 			\
+	      loaddefs.el					\
+	      > "$(lispdir)/loaddefs.el" || exit 1;		\
+	else							\
+	  $(INSTALL) -p -m 644 loaddefs.el "$(lispdir)";	\
+	fi
+	[ -f "$(lispdir)/loaddefs.el" ] || exit 2
 
 install-data-hook: $(emacs_type)_install
+
+all: template-insert-config.el $(ELCS)
+
+check: all
+
+test: check
+
+test-system: check
+	$(MAKE) -C tests/system "${@}-real"
+
+check-system: test-system

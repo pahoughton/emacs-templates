@@ -1,59 +1,18 @@
+;; default-c-block.tmpl - 08/18/2001 08:56
 ;;
-;;  File:	default-c-block.tmpl
-;;  Project:	EmacsTemplates 
-;;  Desc:
+;; Template for files that use 'c' style block comments.
 ;;
-;;	Template for files that use 'c' style block comments.
-;;  
-;;  Notes:
-;;    
-;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
-;;  Created:     08/18/2001 08:56
-;;  
-;;  Revision Info: (See ChangeLog or cvs log for revision history)
-;;  
-;;	$Author$
-;;	$Date$
-;;	$Revision$
-;;	$State$
+;; Copyright (c) 2001-2013 Paul Houghton <paul4hough@gmail.com>
 ;;
-;;  $Id$
-;;
-
-
-(or template-doc-desc
-    (setq template-doc-desc ""))
 
 (insert
 "/**
-  File:		" file-name "
-  Project:	" (template-get-project-name)
-		  " "
-		  (template-ver-string 'project) "
-  Desc:
+ " file-name " - " timestamp "
 
-    " template-doc-desc "
-  
-  Notes:
-    
-  Author(s):   " (user-full-name) " " email "
-  Created:     " timestamp "
-  
-  Revision History: (See ChangeLog for details)
-  
-    " (template-ver-string 'author) "
-    " (template-ver-string 'tag) "
-    " (template-ver-string 'date) "
-    " (template-ver-string 'version) "
-    " (template-ver-string 'state) "
-
-  " (template-ver-string 'id) "
-
+ " copyright "
 **/
-
-
 ")
 
-;;; Local Variables:
-;;; mode:Emacs-lisp
-;;; End:
+;; Local Variables:
+;; mode:Emacs-lisp
+;; End:

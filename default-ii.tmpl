@@ -1,24 +1,12 @@
 ;;
 ;;  File:	default-ii.tmpl
-;;  Project:	EmacsTemplates 
+;;  Project:	emacs-templates
 ;;  Desc:
 ;;
 ;;	Emacs Lisp source
-;;  
-;;  Notes:
-;;    
-;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
-;;  Created:     02/21/2002 08:41
-;;  
-;;  Revision Info: (See ChangeLog or cvs log for revision history)
-;;  
-;;	$Author$
-;;	$Date$
-;;	$Name$
-;;	$Revision$
-;;	$State$
 ;;
-;;  $Id$
+;;  Author(s):   Paul Houghton <paul4hough@gmail.com>
+;;  Created:     02/21/2002 08:41
 ;;
 
 
@@ -42,63 +30,23 @@
 ;;  (template-insert-fragment tmpl-file)
 ;;	Return a string containing the processed contents of
 ;;	a template file. See Makefile.tmpl for a usage example.
-;;	
+;;
 
-(or template-doc-desc
-    (setq template-doc-desc ""))
-
-(let* ( (define-name
-	  (concat "_" (replace-in-string file-name "\\.ii$" "_ii_" )))
-	(class-name
-	 (replace-in-string file-name "\\.ii$" "" ))
-	(prj-name (template-get-project-name)) )
+(let* ((define-name (concat "_" (replace-regexp-in-string
+				  "\\.h$"
+				  "_h_"
+				  file-name )))
+       (class-name file-base-name)
+       )
 
   (insert
 "#ifndef " define-name "
 #define " define-name "
-/**
-  File:		" file-name "
-  Project:	" prj-name
-		  " "
-		  (template-ver-string 'project) "
-  Desc:
+"  (template-insert-fragment "default-c-block.tmpl") "
 
-    " template-doc-desc "
-  
-  Notes:
-    
-  Author(s):   " (user-full-name) " " email "
-  Created:     " timestamp "
-  
-  Revision History: (See ChangeLog for details)
-  
-    " (template-ver-string 'author) "
-    " (template-ver-string 'date) "
-    " (template-ver-string 'version) "
-    " (template-ver-string 'tag) "
-    " (template-ver-string 'state) "
-
-  " (template-ver-string 'id) "
-
-**/
-#if defined( " (upcase prj-name) "_DEBUG )
+#if defined( " (upcase product-dir-name) "_DEBUG )
 #define inline
 #endif
-
-inline
-ostream &
-operator << ( ostream & dest, const "class-name" & obj )
-{
-  return( obj.toStream( dest ) );
-}
-
-inline
-istream &
-operator >> ( istream & src, "class-name" & obj )
-{
-  return( obj.fromStream( src ) );
-}
-
 
 #if defined( inline )
 #undef inline
@@ -113,10 +61,10 @@ operator >> ( istream & src, "class-name" & obj )
   End:
 **/
 
-#endif // ! def " define-name " 
+#endif // ! def " define-name "
 ")
   (beginning-of-buffer)
-  )
+)
 ;;; Local Variables:
 ;;; mode:Emacs-Lisp
 ;;; end:

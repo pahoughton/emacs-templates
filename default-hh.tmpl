@@ -1,89 +1,23 @@
 ;;
-;;  File:	default-hh.tmpl
-;;  Project:	EmacsTemplates 
-;;  Desc:
+;; default-hh.tmpl - 02/21/2002 08:00
 ;;
-;;	Emacs Lisp source
-;;  
-;;  Notes:
-;;    
-;;  Author(s):   Paul Houghton <pahoughton@users.sourceforge.net>
-;;  Created:     02/21/2002 08:00
-;;  
-;;  Revision Info: (See ChangeLog or cvs log for revision history)
-;;  
-;;	$Author$
-;;	$Date$
-;;	$Name$
-;;	$Revision$
-;;	$State$
-;;
-;;  $Id$
-;;
+;; Copyright (c) 2013 Paul Houghton <paul4hough@gmail.com>
 
 
-;;
-;; Available Template Variables:
-;;
-;;  file-name
-;;  file-base-name
-;;  file-ext
-;;  email
-;;  timestamp
-;;
-;; Available Template Functions
-;;
-;;  (template-ver-string  tag)
-;;	where tag can be one of:
-;;	    'project | 'author | 'date | 'version | 'state | 'id | 'log
-;;
-;;  (template-get-project-name)
-;;
-;;  (template-insert-fragment tmpl-file)
-;;	Return a string containing the processed contents of
-;;	a template file. See Makefile.tmpl for a usage example.
-;;	
-
-(or template-doc-desc
-    (setq template-doc-desc ""))
-
-(let* ( (define-name
-	  (concat "_" (replace-in-string file-name "\\.hh$" "_hh_" )))
-	(class-name
-	 (replace-in-string file-name "\\.hh$" "" ))
-	(prj-name (template-get-project-name)) )
+(let* ((define-name (concat "_" (replace-regexp-in-string
+				  "\\.h$"
+				  "_h_"
+				  file-name )))
+       (class-name file-base-name)
+       )
 
   (insert
 "#ifndef " define-name "
 #define " define-name "
-/**
-  File:		" file-name "
-  Project:	" prj-name
-		  " "
-		  (template-ver-string 'project) "
-  Desc:
-
-    " template-doc-desc "
-  
-  Notes:
-    
-  Author(s):   " (user-full-name) " " email "
-  Created:     " timestamp "
-  
-  Revision History: (See ChangeLog for details)
-  
-    " (template-ver-string 'author) "
-    " (template-ver-string 'date) "
-    " (template-ver-string 'version) "
-    " (template-ver-string 'tag) "
-    " (template-ver-string 'state) "
-
-  " (template-ver-string 'id) "
-
-**/
+" (template-insert-fragment "default-c-block.tmpl") "
 #include <iostream>
 
-#if defined( " (upcase prj-name) "_DEBUG )
+#if defined( " (upcase product-dir-name) "_DEBUG )
 #define inline
 #endif
 
@@ -97,16 +31,9 @@ public:
 
   virtual ~"class-name"( void );
 
-  virtual ostream &	    write( ostream & dest ) const;
-  virtual istream &	    read( istream & src );
-
-  virtual ostream &	    toStream( ostream & dest ) const;
-  virtual istream &	    fromStream( istream & src );
-
   virtual bool	    	good( void ) const;
   virtual const char * 	error( void ) const;
   virtual const char *	getClassName( void ) const;
-  virtual const char *  getVersion( bool withPrjVer = true ) const;
   virtual ostream &     dumpInfo( ostream &	dest = cerr,
 				  const char *  prefix = \"    \",
                                   bool          showVer = true ) const;
@@ -134,89 +61,7 @@ operator >> ( istream & src, const "class-name" & dest );
 
 #endif
 
-
-/**
-  Detail Documentation
-  
-    Data Types: - data types defined by this header
-  
-    	"class-name"	class
-  
-    Constructors:
-  
-    	"class-name"( );
-  
-    Destructors:
-  
-    Public Interface:
-  
-  	virtual ostream &
-  	write( ostream & dest ) const;
-  	    write the data for this class in binary form to the ostream.
-  
-  	virtual istream &
-  	read( istream & src );
-  	    read the data in binary form from the istream. It is
-  	    assumed it stream is correctly posistioned and the data
-  	    was written to the istream with 'write( ostream & )'
-  
-  	virtual ostream &
-  	toStream( ostream & dest ) const;
-  	    output class as a string to dest (used by operator <<)
-  
-  	virtual istream &
-  	fromStream( istream & src );
-  	    Set this class be reading a string representation from
-  	    src. Returns src.
-  
-    	virtual Bool
-    	good( void ) const;
-    	    Return true if there are no detected errors associated
-    	    with this class, otherwise false.
-  
-    	virtual const char *
-    	error( void ) const;
-    	    Return a string description of the state of the class.
-  
-    	virtual const char *
-    	getClassName( void ) const;
-    	    Return the name of this class (i.e. "class-name" )
-  
-    	virtual const char *
-    	getVersion( bool withPrjVer = true ) const;
-    	    Return the version string of this class.
-  
-  	virtual ostream &
-  	dumpInfo( ostream & dest, const char * prefix, bool showVer );
-  	    output detail info to dest. Includes instance variable
-  	    values, state info & version info.
-  
-    Protected Interface:
-  
-    Private Methods:
-  
-    Associated Functions:
-  
-    	ostream &
-    	operator <<( ostream & dest, const "class-name" & src );
-  
-  	istream &
-  	operator >> ( istream & src, " class-name " & dest );
-  
-  Example:
-  
-  See Also:
-  
-  Files:
-  
-  Documented Ver:
-  
-  Tested Ver:
-  
-**/
-
 #endif /* ! def " define-name " */
-
 ")
   (beginning-of-buffer)
   )
