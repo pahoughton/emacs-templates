@@ -54,4 +54,4 @@ output for examples
 
 [![LICENSE](http://i.creativecommons.org/l/by/3.0/88x31.png)](http://creativecommons.org/licenses/by/3.0/)
 
-[![endorse](https://api.coderwall.com/pahoughton/endorsecount.png)](https://coderwall.com/" template-coderwall-user ")
+[![endorse](https://api.coderwall.com/pahoughton/endorsecount.png)](https://coderwall.com/pahoughton)
