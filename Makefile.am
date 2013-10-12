@@ -11,7 +11,10 @@
 
 SUBDIRS	= tests/unit tests/system
 
-template_files = $(wildcard *.tmpl)
+template_files = 		\
+	$(wildcard *.tmpl) 	\
+	.travis.yml.tmpl 	\
+	.fixtures.yml.tmpl
 
 elisp_sources	=				\
 	template-insert.el			\
