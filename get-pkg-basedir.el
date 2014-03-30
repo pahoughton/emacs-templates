@@ -38,6 +38,6 @@
 	  (setq pkg-base-dir (substring (car load-path) 0 (match-end 0)))
 	  (if (not (file-writable-p pkg-base-dir))
 	      (setq pkg-base-dir (concat (getenv "HOME") "/.emacs.d/lisp"))))
-      (setq pkg-base-dir ""))
+      (setq pkg-base-dir (concat (getenv "HOME") "/.emacs.d/lisp")))
     )
 )
