@@ -1,0 +1,33 @@
+;;
+;; default-css.tmpl - 2014-04-24 05:52
+;;
+;; Copyright (c) 2014 Paul Houghton <paul4hough@gmail.com>
+
+
+;;
+;; Available Template Variables:
+;;
+;;  file-name
+;;  file-base-name
+;;  file-ext
+;;  email
+;;  timestamp
+;;
+;; Available Template Functions
+;;
+;;  (template-ver-string  tag)
+;;	where tag can be one of:
+;;	    'project | 'author | 'date | 'version | 'state | 'id | 'log
+;;
+;;  (template-get-project-name)
+;;
+;;  (template-insert-fragment tmpl-file)
+;;	Return a string containing the processed contents of
+;;	a template file. See Makefile.tmpl for a usage example.
+;;
+
+(or template-doc-desc
+    (setq template-doc-desc ""))
+
+(insert
+ (template-insert-fragment "default-c-block.tmpl"))
