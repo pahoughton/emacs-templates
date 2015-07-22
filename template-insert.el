@@ -164,7 +164,7 @@ Helper functions
 		      (prin1-to-string template-dir-list))))
     )
   )
-  
+
 
 (defun template-insert-fragment (tmpl)
   "Insert the contents 'tmpl' as part of a template"
@@ -173,7 +173,7 @@ Helper functions
 	  )
     (if tmpl-file
 	(progn
-	 
+
 	  (message (concat "Inserting template fragment: " tmpl-file))
 	  (let* ( (frag-string nil)
 		  (buf-file-full-name (buffer-file-name))
@@ -221,16 +221,10 @@ current buffer."
 	  (file-ext (file-name-extension file-name))
 	  (product-dir-name (file-name-nondirectory
 			     (template-product-dir-name buf-file-full-name)))
-	  (timestamp (format-time-string "%Y-%m-%d %R"))
+	  (timestamp (format-time-string "%Y-%m-%d"))
 	  (copyright (if (getenv "COPYRIGHT")
-			 (concat "Copyright (c) "
-				 (format-time-string "%Y ")
-				 (getenv "COPYRIGHT"))
-		       
-		       (concat "Copyright (c) "
-			       (format-time-string "%Y ")
-			       (user-full-name)
-			       " " email )))
+			 (concat " (cc) " (getenv "COPYRIGHT"))
+		       (concat "(cc) " email )))
 	  (tmp-buf nil)
 	  )
     (message (concat "Inserting template: " tmpl-file))
