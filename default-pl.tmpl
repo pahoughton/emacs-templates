@@ -23,7 +23,7 @@
 ;;  (template-ver-string  tag)
 ;;	where tag can be one of:
 ;;	    'project | 'author | 'date | 'version | 'state | 'id | 'log
-;;
+;;'
 ;;  (template-get-project-name)
 ;;
 ;;  (template-insert-fragment tmpl-file)
@@ -40,6 +40,8 @@ eval 'exec perl -w -S $0 ${1+\"$@\"}'
     if 0 ;
 
 use warnings;
+use strict;
+use Carp;
 #use DBI;
 #use DBD::Pg qw(:pg_types);
 #use File::Basename;
