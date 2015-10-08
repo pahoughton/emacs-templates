@@ -1,0 +1,65 @@
+;;
+;; default-_spec.rb.tmpl - 2014-04-03 12:38
+;;
+;; Copyright (c) 2014 Paul Houghton <paul4hough@gmail.com>
+
+
+
+(or template-doc-desc
+    (setq template-doc-desc ""))
+
+(insert
+"# " file-name " - " timestamp "
+#
+# " copyright "
+#
+require 'spec_helper'
+
+os_lsbdist = {
+  'Ubuntu' => 'ubuntu',
+}
+os_lsbname = {
+  'Ubuntu' => 'precise',
+}
+
+os_family = {
+  'Fedora' => 'RedHat',
+  'CentOS' => 'RedHat',
+  'Ubuntu' => 'debian',
+}
+os_rel = {
+  'Fedora' => '20',
+  'CentOS' => '6',
+  'Ubuntu' => '13',
+}
+
+tobject = 'FIXME::" file-base-name "'
+['Fedora','CentOS','Ubuntu'].each { |os|
+  describe tobject, :type => :class do
+    tfacts = {
+      :osfamily               => os_family[os],
+      :operatingsystem        => os,
+      :operatingsystemrelease => os_rel[os],
+      :os_maj_version         => os_rel[os],
+      # todo apt module
+      :lsbdistid              => os_lsbdist[os],
+      :lsbdistcodename        => os_lsbname[os],
+    }
+    let(:facts) do tfacts end
+    context \"supports facts #{tfacts}\" do
+      # FIXME
+      # it { should compile } - fail: expected that the catalogue would include
+      it { should contain_class(tobject) }
+      [tobject,
+      ].each { |cls|
+        it { should contain_class(cls) }
+      }
+    end
+  end
+}
+
+")
+
+;;; Local Variables:
+;;; mode:Emacs-Lisp
+;;; end:

@@ -1,17 +1,9 @@
 ;;
-;;  File:	default-tmpl.tmpl
-;;  Project:	emacs-templates
-;;  Desc:
+;; default-css.tmpl - 2014-04-24 05:52
 ;;
-;;	Emacs Lisp source
-;;
-;;  Author(s):   Paul Houghton < paul4hough@gmail.com>
-;;  Created:     08/18/2001 05:38
-;;
+;; Copyright (c) 2014 Paul Houghton <paul4hough@gmail.com>
 
-(insert
-(template-insert-fragment "default-el.tmpl")
-"
+
 ;;
 ;; Available Template Variables:
 ;;
@@ -35,20 +27,7 @@
 ;;
 
 (or template-doc-desc
-    (setq template-doc-desc \"\"))
+    (setq template-doc-desc ""))
 
 (insert
-\"
-; example variables
-(let* ( (class-name file-base-name)
-	(include-name (concat class-name \".hh\" ))
-	)
-  (insert
-   (template-insert-fragment \"default-c-block.tmpl\")
-   \"
-   # your stuff here
-   \"))
-\"
-)
-
-")
+ (template-insert-fragment "default-c-block.tmpl"))
