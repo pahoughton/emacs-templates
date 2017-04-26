@@ -1,0 +1,50 @@
+;; 2002-02-21 (cc) <paul4hough@gmail.com>
+
+(let* ((define-name (concat "_" (replace-regexp-in-string
+				  "\\.hpp$"
+				  "_hpp_"
+				  file-name )))
+       (class-name file-base-name)
+       )
+
+  (insert
+"
+#ifndef " define-name "
+#define " define-name "
+// " timestamp " " copyright "
+
+#include <iostream>
+
+class " class-name "
+{
+
+public:
+
+  "class-name"( void );
+
+  virtual ~"class-name"( void );
+
+protected:
+
+private:
+
+  " class-name "( const " class-name " & from );
+  " class-name " & operator =( const " class-name " & from );
+
+};
+
+ostream &
+operator << ( ostream & dest, const "class-name" & src );
+
+istream &
+operator >> ( istream & src, const "class-name" & dest );
+
+
+#endif /* ! def " define-name " */
+")
+  (beginning-of-buffer)
+  )
+
+;;; Local Variables:
+;;; mode:Emacs-Lisp
+;;; end:

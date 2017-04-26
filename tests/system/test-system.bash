@@ -32,7 +32,7 @@ TEST_HOME=`pwd`/test_home
 tar xf "../${product_dir}"*tar.gz
 cd "${product_dir}"*
 HOME="${TEST_HOME}"
-autoreconf && 
+autoreconf &&
 ./configure --with-lispdir="${TEST_HOME}/.emacs.d/lisp" &&
 make install || exit 1
 # double install works? (had a bug w/ this b4)
@@ -46,7 +46,7 @@ echo "Feature: emacs-templates"
 tfn=test-template-sys.out
 emacs -batch --load tests/system/test-template-insert-sys.el > "${tfn}" 2>&1
 cat "${tfn}"
-if grep 'Copyright' "${tfn}" && \
+if grep 'class test-sys-temp' "${tfn}" && \
     grep '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]' \
        "${tfn}" ; then
   echo " provides .py template."

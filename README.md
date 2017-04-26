@@ -51,7 +51,11 @@ See [Travis](https://travis-ci.org/pahoughton/emacs-templates) console
 output for examples
 
 ## License
+1995-11-13 (cc)  Paul Houghton <paul4hough@gmail.com>
 
-[![LICENSE](http://i.creativecommons.org/l/by/3.0/88x31.png)](http://creativecommons.org/licenses/by/3.0/)
-
-[![endorse](https://api.coderwall.com/pahoughton/endorsecount.png)](https://coderwall.com/pahoughton)
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+<img alt="Creative Commons License" style="border-width:0"
+src="https://i.creativecommons.org/l/by/4.0/80x15.png" />
+</a>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+Creative Commons Attribution 4.0 International License</a>.
