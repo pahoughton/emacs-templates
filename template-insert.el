@@ -234,7 +234,9 @@ current buffer."
       (insert-file-contents tmpl-file))
 
     (eval-buffer tmp-buf)
-    (kill-buffer tmp-buf)))
+    (kill-buffer tmp-buf)
+    (goto-char (point-max))
+    ))
 
 (defun template-find-tmpl (file-name)
   "Find the template for a file"
