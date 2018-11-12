@@ -200,17 +200,20 @@ given template-ver-mgmt is git then look for .git directory
 given not found yet then look for one of the files configure.ac,
 LICENSE, README.md and README.
 "
-  (let* ( (top-file-list '("configure.ac", "LICENSE", "README.md", "README"))
+  (let* ( (top-file-list '(".git" "configure.ac"
+			   "LICENSE" "README.md" "README"))
 	  (iter 0)
 	  (found-dir nil)
 	  )
-    (if (eq template-ver-mgmt "git")
-	(setq found-dir (find-up-dir ".git" full-fn)))
-    (while (and (not found-dir) (< iter (length top-file-list)))
+    (while (and (not found-dir) (elt top-file-list iter))
+      ;; (message "fn %d - %s" iter (elt top-file-list iter))
       (setq found-dir (find-up-dir (elt top-file-list iter) full-fn))
-      (message "fn %s - %s" (elt top-file-list iter) found-dir)
+      (setq iter (+ iter 1))
       )
-    found-dir))
+    (if (not found-dir)
+	(setq found-dir (substring (file-name-directory full-fn) 0 -1)))
+    found-dir
+    ))
 
 (defun template-insert-file (tmpl-file buf-file-full-name)
   "Insert the evaluated contents of the file 'tmpl-file' into the
