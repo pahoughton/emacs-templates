@@ -1,14 +1,4 @@
-#
-# File:		acinclude.m4
-# Project:	emacs-templates 
-# Desc:
-#
-#   Project specific m4 macros
-#
-# Notes:
-#
-# Author(s):   Paul Houghton <paul4hough@gmail.com>
-# Created:     06/01/2003 07:07
+# 2003-01-06 (cc) Paul Houghton <paul4hough@gmail.com>
 #
 
 AC_DEFUN([PAH_PROG_EMACS],
@@ -28,7 +18,7 @@ AC_DEFUN([PAH_PROG_EMACS],
   AC_SUBST(pah_emacs_type)
 ])
 
-  
+
 AC_DEFUN([PAH_PATH_LISPDIR],
 [AC_ARG_WITH(lispdir,
   AC_HELP_STRING([--with-lispdir],[Override the default lisp directory]),
@@ -55,4 +45,30 @@ AC_DEFUN([PAH_PATH_LISPDIR],
   AC_SUBST(lispdir)
 ])# PAH_PATH_LISPDIR
 
+AC_DEFUN([PAH_GITHOST],
+[ AC_ARG_WITH(githost,
+  AC_HELP_STRING([--with-githost],[Override the default git repo host]),
+  [ githost="$withval"
+    AC_MSG_RESULT([$githost])],
+  [ if test x${githost+xset} != xset; then
+      AC_CACHE_CHECK([value for githost], [pah_cv_githost],
+        [pah_cv_githost=github.com])
+      githost="$pah_cv_githost"
+    fi
+  ])
+  AC_SUBST(githost)
+])
 
+AC_DEFUN([PAH_GITDIR],
+[ AC_ARG_WITH(gitdir,
+  AC_HELP_STRING([--with-gitdir],[Override the default git repo dir]),
+  [ gitdir="$withval"
+    AC_MSG_RESULT([$gitdir])],
+  [ if test x${gitdir+xset} != xset; then
+      AC_CACHE_CHECK([value for gitdir], [pah_cv_gitdir],
+        [pah_cv_gitdir=pahoughton])
+      gitdir="$pah_cv_gitdir"
+    fi
+  ])
+  AC_SUBST(gitdir)
+])

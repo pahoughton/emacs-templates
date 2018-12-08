@@ -16,3 +16,4 @@ emacs-templates*tar.gz
 loaddefs.el
 Vagrantfile
 .vagrant
+template-insert.el

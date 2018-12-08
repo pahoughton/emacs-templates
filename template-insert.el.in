@@ -1,13 +1,4 @@
-;;
-;;  File:	template-insert.el
-;;  Project:	emacs-templates
-;;  Desc:
-;;
-;;	Insert a template into the current buffer.
-;;
-;;  Author(s):   Paul Houghton <paul4hough@gmail.com>
-;;  Created:     08/17/2001 13:20
-;;
+;; 2001-08-17 (cc) Paul Houghton <paul4hough@gmail.com>
 
 (require 'template-insert-config)
 (require 'find-up-dir)
@@ -26,11 +17,15 @@
   :group 'templates
   :type 'string)
 
-(defcustom template-github-user "pahoughton"
+(defcustom template-gitdir "@gitdir@"
   "*Default github user id for README.md"
   :group 'templates
   :type 'string)
 
+(defcustom template-githost "@githost@"
+  "*Default git host for README.md"
+  :group 'templates
+  :type 'string)
 
 (defcustom template-dir-list
   (list "." "./.templates" "~/.templates" template-insert-tmpl-dir)
