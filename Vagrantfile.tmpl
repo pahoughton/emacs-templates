@@ -11,7 +11,7 @@ Vagrant.configure('2') do |cfg|
   cfg.vm.define mybox do |bcfg|
     bcfg.vm.box		= 'c7g'
     bcfg.vm.hostname	= mybox
-    bcfg.vm.network    'private_network', ip: '10.0.2.5'
+    bcfg.vm.network    'private_network', ip: '10.0.0.5'
     bcfg.vm.provider   'virtualbox' do |vb|
       vb.name      = mybox
       vb.cpus      = 1
