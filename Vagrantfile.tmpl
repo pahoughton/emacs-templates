@@ -1,0 +1,33 @@
+;; 2019-01-03 (cc) <paul4hough@gmail.com>  -*- Emacs-Lisp -*-
+
+(insert
+"# " timestamp " " copyright "
+#
+Vagrant.configure("2") do |cfg|
+  # cfg.vm.box_check_update = false
+
+  mybox = 'mybox'
+
+  config.vm.define mybox do |bcfg|
+    bcfg.vm.box		= 'c7g'
+    bcfg.vm.hostname	= mybox
+    bcfg.vm.network    'private_network', ip: '10.0.2.5'
+    bcfg.vm.provider   'virtualbox' do |vb|
+      vb.name      = mybox
+      vb.cpus      = 1
+      vb.memory    = 1024
+      vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+      vb.customize ['modifyvm', :id, '--natdnspassdomain1', 'on']
+      vb.customize ['modifyvm', :id, '--usb', 'off']
+    # vb.customize ['storageattach', :id,
+    #               '--storagectl', 'IDE',
+    #               '--port', '0', '--device', '1',
+    #               '--type', 'dvddrive',
+    #               '--medium', '/usr/share/virtualbox/VBoxGuestAdditions.iso']
+    end
+    bcfg.vm.provision 'ansible' do |ansible|
+      ansible.playbook = 'ansible/mybox.yml'
+    end
+  end
+
+")
